@@ -1,28 +1,30 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.BorderLayout;
 import java.awt.Font;
 import javax.swing.JToggleButton;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 public class Dashboard extends javax.swing.JFrame {
-    
+
     public Dashboard() {
         initComponents();
     }
-    
+
     private void setFontBold(JToggleButton jToggleButton) {
         Font currentFont = jToggleButton.getFont();
         Font boldFont = currentFont.deriveFont(Font.BOLD);
         jToggleButton.setFont(boldFont);
     }
-    
+
     private void setFontNormal(JToggleButton jToggleButton) {
         Font currentFont = jToggleButton.getFont();
         Font normalFont = currentFont.deriveFont(Font.PLAIN);
         jToggleButton.setFont(normalFont);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -43,6 +45,7 @@ public class Dashboard extends javax.swing.JFrame {
         jToggleButton9 = new javax.swing.JToggleButton();
         jToggleButton10 = new javax.swing.JToggleButton();
         jToggleButton11 = new javax.swing.JToggleButton();
+        MainPanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -87,6 +90,11 @@ public class Dashboard extends javax.swing.JFrame {
                 jToggleButton2FocusLost(evt);
             }
         });
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
 
         jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/office-man.png"))); // NOI18N
         jToggleButton3.setText("User Management");
@@ -101,6 +109,11 @@ public class Dashboard extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jToggleButton3FocusLost(evt);
+            }
+        });
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
             }
         });
 
@@ -286,8 +299,10 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jToggleButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
+
+        MainPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -295,11 +310,13 @@ public class Dashboard extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 805, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jMenu1.setText("File");
@@ -404,13 +421,27 @@ public class Dashboard extends javax.swing.JFrame {
     private void jToggleButton11FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jToggleButton11FocusLost
         setFontNormal(jToggleButton11);
     }//GEN-LAST:event_jToggleButton11FocusLost
-    
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        MainPanel.removeAll();
+        DashboardPanel dp = new DashboardPanel();
+        MainPanel.add(dp, BorderLayout.CENTER);
+        SwingUtilities.updateComponentTreeUI(jPanel3);
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        MainPanel.removeAll();
+        UserManagementPanel ump = new UserManagementPanel();
+        MainPanel.add(ump, BorderLayout.CENTER);
+        SwingUtilities.updateComponentTreeUI(jPanel3);
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
+
     public static void main(String args[]) {
-        
+
         FlatLightLaf.registerCustomDefaultsSource("style");
         FlatLightLaf.setup();
         UIManager.put("TextComponent.arc", 10);
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Dashboard().setVisible(true);
@@ -419,6 +450,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel MainPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
