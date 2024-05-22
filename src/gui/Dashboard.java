@@ -2,14 +2,28 @@ package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 public class Dashboard extends javax.swing.JFrame {
+
+    public static final Color PRIMARYCOLOR = new Color(0, 117, 105);
+
+    public static void editTable(JTable[] table) {
+        for (int i = 0; i < table.length; i++) {
+            table[i].getTableHeader().setBackground(PRIMARYCOLOR);
+            table[i].getTableHeader().setForeground(Color.WHITE);
+        }
+    }
 
     public Dashboard() {
         initComponents();
@@ -42,6 +56,7 @@ public class Dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -92,6 +107,8 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("04: 51: 23 PM");
 
+        jToggleButton2.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jToggleButton2);
         jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/house.png"))); // NOI18N
         jToggleButton2.setText("Dashboard");
         jToggleButton2.setToolTipText("Dashboard");
@@ -114,6 +131,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton3);
         jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/office-man.png"))); // NOI18N
         jToggleButton3.setText("User Management");
         jToggleButton3.setToolTipText("User Management");
@@ -136,6 +154,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton4);
         jToggleButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/man.png"))); // NOI18N
         jToggleButton4.setText("Supplier Management");
         jToggleButton4.setToolTipText("Supplier Management");
@@ -158,6 +177,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton5);
         jToggleButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/customer-service (1).png"))); // NOI18N
         jToggleButton5.setText("Customer Management");
         jToggleButton5.setToolTipText("Customer Management");
@@ -180,6 +200,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton6);
         jToggleButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/box (2).png"))); // NOI18N
         jToggleButton6.setText("Product Management");
         jToggleButton6.setToolTipText("Product Management");
@@ -202,6 +223,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton7);
         jToggleButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/in-stock.png"))); // NOI18N
         jToggleButton7.setText("Stock Management");
         jToggleButton7.setToolTipText("Stock Management");
@@ -224,6 +246,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton8);
         jToggleButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/exchange.png"))); // NOI18N
         jToggleButton8.setText("Return Management");
         jToggleButton8.setToolTipText("Return Management");
@@ -246,6 +269,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton9);
         jToggleButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/tools.png"))); // NOI18N
         jToggleButton9.setText("Repair Management");
         jToggleButton9.setToolTipText("Repair Management");
@@ -268,6 +292,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton10);
         jToggleButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/custom.png"))); // NOI18N
         jToggleButton10.setText("Custom Management");
         jToggleButton10.setToolTipText("Custom Management");
@@ -290,6 +315,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton11);
         jToggleButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/money (2).png"))); // NOI18N
         jToggleButton11.setText("Drawer Management");
         jToggleButton11.setToolTipText("Drawer Balance");
@@ -322,6 +348,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton12);
         jToggleButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/bill (4).png"))); // NOI18N
         jToggleButton12.setText("Invoice Management");
         jToggleButton12.setToolTipText("Drawer Balance");
@@ -344,6 +371,7 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jToggleButton13);
         jToggleButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/notes.png"))); // NOI18N
         jToggleButton13.setText("GRN Management");
         jToggleButton13.setToolTipText("Drawer Balance");
@@ -370,7 +398,7 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -682,6 +710,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MainPanel;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
