@@ -9,12 +9,12 @@ package gui;
  *
  * @author ThinkPad
  */
-public class CustomerManagement extends javax.swing.JPanel {
+public class InvoiceManagement extends javax.swing.JPanel {
 
     /**
-     * Creates new form CustomerManagement
+     * Creates new form InvoiceManagement
      */
-    public CustomerManagement() {
+    public InvoiceManagement() {
         initComponents();
     }
 
@@ -27,7 +27,7 @@ public class CustomerManagement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(204, 204, 255));
+        setBackground(new java.awt.Color(102, 153, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

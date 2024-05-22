@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -29,6 +30,12 @@ public class Dashboard extends javax.swing.JFrame {
         Font currentFont = jToggleButton.getFont();
         Font normalFont = currentFont.deriveFont(Font.PLAIN);
         jToggleButton.setFont(normalFont);
+    }
+
+    private void changePanel(JPanel panel) {
+        MainPanel.removeAll();
+        MainPanel.add(panel, BorderLayout.CENTER);
+        SwingUtilities.updateComponentTreeUI(jPanel3);
     }
 
     @SuppressWarnings("unchecked")
@@ -71,8 +78,9 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/dashboard_image.png"))); // NOI18N
 
-        jLabel2.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel2.setBackground(new java.awt.Color(27, 49, 77));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("D&T Shoe Store");
         jLabel2.setOpaque(true);
@@ -144,6 +152,11 @@ public class Dashboard extends javax.swing.JFrame {
                 jToggleButton4FocusLost(evt);
             }
         });
+        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton4ActionPerformed(evt);
+            }
+        });
 
         jToggleButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/customer-service (1).png"))); // NOI18N
         jToggleButton5.setText("Customer Management");
@@ -159,6 +172,11 @@ public class Dashboard extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jToggleButton5FocusLost(evt);
+            }
+        });
+        jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton5ActionPerformed(evt);
             }
         });
 
@@ -178,6 +196,11 @@ public class Dashboard extends javax.swing.JFrame {
                 jToggleButton6FocusLost(evt);
             }
         });
+        jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton6ActionPerformed(evt);
+            }
+        });
 
         jToggleButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/in-stock.png"))); // NOI18N
         jToggleButton7.setText("Stock Management");
@@ -193,6 +216,11 @@ public class Dashboard extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jToggleButton7FocusLost(evt);
+            }
+        });
+        jToggleButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton7ActionPerformed(evt);
             }
         });
 
@@ -212,6 +240,11 @@ public class Dashboard extends javax.swing.JFrame {
                 jToggleButton8FocusLost(evt);
             }
         });
+        jToggleButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton8ActionPerformed(evt);
+            }
+        });
 
         jToggleButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/tools.png"))); // NOI18N
         jToggleButton9.setText("Repair Management");
@@ -227,6 +260,11 @@ public class Dashboard extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jToggleButton9FocusLost(evt);
+            }
+        });
+        jToggleButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton9ActionPerformed(evt);
             }
         });
 
@@ -246,9 +284,14 @@ public class Dashboard extends javax.swing.JFrame {
                 jToggleButton10FocusLost(evt);
             }
         });
+        jToggleButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton10ActionPerformed(evt);
+            }
+        });
 
         jToggleButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/money (2).png"))); // NOI18N
-        jToggleButton11.setText("Drawer Balance");
+        jToggleButton11.setText("Drawer Management");
         jToggleButton11.setToolTipText("Drawer Balance");
         jToggleButton11.setContentAreaFilled(false);
         jToggleButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -293,6 +336,11 @@ public class Dashboard extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jToggleButton12FocusLost(evt);
+            }
+        });
+        jToggleButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton12ActionPerformed(evt);
             }
         });
 
@@ -510,17 +558,11 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton11FocusLost
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        MainPanel.removeAll();
-        DashboardPanel dp = new DashboardPanel();
-        MainPanel.add(dp, BorderLayout.CENTER);
-        SwingUtilities.updateComponentTreeUI(jPanel3);
+        changePanel(new DashboardPanel());
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        MainPanel.removeAll();
-        UserManagementPanel ump = new UserManagementPanel();
-        MainPanel.add(ump, BorderLayout.CENTER);
-        SwingUtilities.updateComponentTreeUI(jPanel3);
+        changePanel(new UserManagementPanel());
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
@@ -586,12 +628,44 @@ public class Dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton13FocusLost
 
     private void jToggleButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton13ActionPerformed
-        // TODO add your handling code here:
+        changePanel(new GrnManagement());
     }//GEN-LAST:event_jToggleButton13ActionPerformed
 
     private void jToggleButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton11ActionPerformed
-        // TODO add your handling code here:
+        changePanel(new DrawerManagement());
     }//GEN-LAST:event_jToggleButton11ActionPerformed
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
+        changePanel(new SupplierManagement());
+    }//GEN-LAST:event_jToggleButton4ActionPerformed
+
+    private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
+        changePanel(new CustomManagement());
+    }//GEN-LAST:event_jToggleButton5ActionPerformed
+
+    private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton6ActionPerformed
+        changePanel(new ProductManagement());
+    }//GEN-LAST:event_jToggleButton6ActionPerformed
+
+    private void jToggleButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton7ActionPerformed
+        changePanel(new StockManagement());
+    }//GEN-LAST:event_jToggleButton7ActionPerformed
+
+    private void jToggleButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton8ActionPerformed
+        changePanel(new ReturnManagement());
+    }//GEN-LAST:event_jToggleButton8ActionPerformed
+
+    private void jToggleButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton9ActionPerformed
+        changePanel(new RepairManagement());
+    }//GEN-LAST:event_jToggleButton9ActionPerformed
+
+    private void jToggleButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton10ActionPerformed
+        changePanel(new CustomManagement());
+    }//GEN-LAST:event_jToggleButton10ActionPerformed
+
+    private void jToggleButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton12ActionPerformed
+        changePanel(new InvoiceManagement());
+    }//GEN-LAST:event_jToggleButton12ActionPerformed
 
     public static void main(String args[]) {
 
