@@ -1,6 +1,7 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import javafx.scene.paint.Color;
 import javax.swing.UIManager;
 
 public class SignIn extends javax.swing.JFrame {
@@ -54,10 +55,17 @@ public class SignIn extends javax.swing.JFrame {
 
         jLabel4.setText("Password");
 
+        jButton2.setBackground(new java.awt.Color(27, 49, 77));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Sign In");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setPreferredSize(new java.awt.Dimension(79, 35));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 2, 13)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -150,11 +158,17 @@ public class SignIn extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new Dashboard().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public static void main(String args[]) {
 
         FlatLightLaf.registerCustomDefaultsSource("style");
         FlatLightLaf.setup();
-        UIManager.put("TextComponent.arc", 10);
+//        UIManager.put("TextComponent.arc", 8);
+        UIManager.put("TextComponent", Color.GREEN);
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
