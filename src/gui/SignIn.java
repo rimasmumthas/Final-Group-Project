@@ -54,7 +54,9 @@ public class SignIn extends javax.swing.JFrame {
 
         jLabel4.setText("Password");
 
+        jButton2.setBackground(new java.awt.Color(27, 49, 77));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Sign In");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setPreferredSize(new java.awt.Dimension(79, 35));
