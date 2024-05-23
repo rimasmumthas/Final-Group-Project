@@ -78,6 +78,9 @@ public class UserManagementPanel extends javax.swing.JPanel {
         jTextField6.setText("");
         jButton3.setEnabled(false);
         jButton2.setEnabled(false);
+        jTable1.setEnabled(true);
+        jTextField6.setEnabled(true);
+        jButton1.setEnabled(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -262,6 +265,11 @@ public class UserManagementPanel extends javax.swing.JPanel {
         jLabel8.setText("Search User");
 
         jTextField6.setPreferredSize(new java.awt.Dimension(249, 35));
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(27, 49, 77));
         jButton3.setText("Change Status");
@@ -324,6 +332,11 @@ public class UserManagementPanel extends javax.swing.JPanel {
             }
         });
         jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -397,7 +410,7 @@ public class UserManagementPanel extends javax.swing.JPanel {
                     loadUsers("SELECT * FROM `user` "
                             + "INNER JOIN `user_type` ON `user`.`user_type_id`=`user_type`.`id` "
                             + "INNER JOIN `status` ON `user`.`status_id`=`status`.`id`");
-                    JOptionPane.showMessageDialog(this, "User saved successfully!", "information", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "User saved successfully", "Information", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (Exception e) {
                 SignIn.log1.warning(e.toString());
@@ -407,16 +420,120 @@ public class UserManagementPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow != -1) {
+
+            String id = String.valueOf(jTable1.getValueAt(selectedRow, 0));
+            String status = String.valueOf(jTable1.getValueAt(selectedRow, 6));
+
+            try {
+                if (status.equals("Active")) {
+                    MySQL.execute("UPDATE `user` SET `status_id`='2' "
+                            + "WHERE `id`='" + id + "'");
+                } else {
+                    MySQL.execute("UPDATE `user` SET `status_id`='1' "
+                            + "WHERE `id`='" + id + "'");
+                }
+                loadUsers("SELECT * FROM `user` "
+                        + "INNER JOIN `user_type` ON `user`.`user_type_id`=`user_type`.`id` "
+                        + "INNER JOIN `status` ON `user`.`status_id`=`status`.`id`");
+
+                JOptionPane.showMessageDialog(this, "User status changed successfully", "Information", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                SignIn.log1.warning(e.toString());
+            }
+
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+
+        String id = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 0));
+        String fname = jTextField1.getText();
+        String lname = jTextField2.getText();
+        String mobile = jTextField3.getText();
+        String username = jTextField4.getText();
+        String password = String.valueOf(jPasswordField1.getPassword());
+        String type = String.valueOf(jComboBox1.getSelectedItem());
+
+        if (fname.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "First name is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (fname.length() > 40) {
+            JOptionPane.showMessageDialog(this, "First name shuld be less than 40 characters", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (lname.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Last name is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (lname.length() > 40) {
+            JOptionPane.showMessageDialog(this, "Last name shuld be less than 40 characters", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (mobile.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mobile number is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (!mobile.matches("^07[01245678]{1}[0-9]{7}$")) {
+            JOptionPane.showMessageDialog(this, "Invalid mobile number", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (username.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Password is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (type.equals("Select")) {
+            JOptionPane.showMessageDialog(this, "Select user type", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                MySQL.execute("UPDATE `user` SET "
+                        + "`fname`='" + fname + "',"
+                        + "`lname`='" + lname + "',"
+                        + "`mobile`='" + mobile + "',"
+                        + "`username`='" + username + "',"
+                        + "`password`='" + password + "',"
+                        + "`user_type_id`='" + typeMap.get(type) + "'"
+                        + "WHERE `id`='" + id + "'");
+                resetUserPanel();
+                loadUsers("SELECT * FROM `user` "
+                        + "INNER JOIN `user_type` ON `user`.`user_type_id`=`user_type`.`id` "
+                        + "INNER JOIN `status` ON `user`.`status_id`=`status`.`id`");
+                JOptionPane.showMessageDialog(this, "User updated successfully", "Information", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                SignIn.log1.warning(e.toString());
+            }
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         resetUserPanel();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (evt.getClickCount() == 1 && selectedRow != -1) {
+            jButton3.setEnabled(true);
+        } else if (evt.getClickCount() == 2 && selectedRow != -1) {
+            jTable1.setEnabled(false);
+            jButton3.setEnabled(false);
+            jTextField6.setEnabled(false);
+            jButton1.setEnabled(false);
+            jButton2.setEnabled(true);
+
+            jTextField1.setText(String.valueOf(jTable1.getValueAt(selectedRow, 1)));
+            jTextField2.setText(String.valueOf(jTable1.getValueAt(selectedRow, 2)));
+            jTextField3.setText(String.valueOf(jTable1.getValueAt(selectedRow, 3)));
+            jTextField4.setText(String.valueOf(jTable1.getValueAt(selectedRow, 4)));
+            jComboBox1.setSelectedItem(String.valueOf(jTable1.getValueAt(selectedRow, 5)));
+        }
+
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+
+        String text = jTextField6.getText();
+        loadUsers("SELECT * FROM `user` "
+                + "INNER JOIN `user_type` ON `user`.`user_type_id`=`user_type`.`id` "
+                + "INNER JOIN `status` ON `user`.`status_id`=`status`.`id` WHERE "
+                + "`fname` LIKE '" + text + "%' OR `lname` LIKE '" + text + "%' OR `username` LIKE '" + text + "%' OR `mobile` LIKE '" + text + "%'");
+
+    }//GEN-LAST:event_jTextField6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
