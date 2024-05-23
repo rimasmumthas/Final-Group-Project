@@ -86,7 +86,7 @@ public class StockManagement extends javax.swing.JPanel {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel12.setText("Search User");
+        jLabel12.setText("Search ");
 
         jTextField8.setPreferredSize(new java.awt.Dimension(249, 35));
 
