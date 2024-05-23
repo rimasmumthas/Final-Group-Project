@@ -1,7 +1,6 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import javafx.scene.paint.Color;
 import javax.swing.UIManager;
 
 public class SignIn extends javax.swing.JFrame {
@@ -167,8 +166,7 @@ public class SignIn extends javax.swing.JFrame {
 
         FlatLightLaf.registerCustomDefaultsSource("style");
         FlatLightLaf.setup();
-//        UIManager.put("TextComponent.arc", 8);
-        UIManager.put("TextComponent", Color.GREEN);
+        UIManager.put("TextComponent.arc", 4);
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
