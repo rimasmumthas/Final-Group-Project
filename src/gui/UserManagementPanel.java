@@ -1,13 +1,83 @@
 package gui;
 
+import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import model.MySQL;
 
 public class UserManagementPanel extends javax.swing.JPanel {
+
+    private HashMap<String, String> typeMap = new HashMap<>();
 
     public UserManagementPanel() {
         initComponents();
         JTable[] jt = {jTable1};
         Dashboard.editTable(jt);
+        loadUserTypes();
+        loadUsers("SELECT * FROM `user` "
+                + "INNER JOIN `user_type` ON `user`.`user_type_id`=`user_type`.`id` "
+                + "INNER JOIN `status` ON `user`.`status_id`=`status`.`id`");
+
+    }
+
+    private void loadUserTypes() {
+        try {
+            ResultSet result = MySQL.execute("SELECT * FROM `user_type`");
+            Vector v = new Vector();
+            v.add("Select");
+            while (result.next()) {
+                v.add(result.getString("type"));
+                typeMap.put(result.getString("type"), result.getString("id"));
+            }
+            DefaultComboBoxModel model = new DefaultComboBoxModel(v);
+            jComboBox1.setModel(model);
+
+        } catch (Exception e) {
+            SignIn.log1.warning(e.toString());
+        }
+    }
+
+    private void loadUsers(String query) {
+
+        try {
+
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+
+            ResultSet results = MySQL.execute(query);
+
+            while (results.next()) {
+                Vector v = new Vector();
+                v.add(results.getString("id"));
+                v.add(results.getString("fname"));
+                v.add(results.getString("lname"));
+                v.add(results.getString("mobile"));
+                v.add(results.getString("username"));
+                v.add(results.getString("user_type.type"));
+                v.add(results.getString("status.status"));
+                model.addRow(v);
+            }
+
+        } catch (Exception e) {
+            SignIn.log1.warning(e.toString());
+        }
+
+    }
+
+    private void resetUserPanel() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jPasswordField1.setText("");
+        jComboBox1.setSelectedIndex(0);
+        jTextField6.setText("");
+        jButton3.setEnabled(false);
+        jButton2.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -97,16 +167,32 @@ public class UserManagementPanel extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jButton1.setText("Create Account");
         jButton1.setPreferredSize(new java.awt.Dimension(79, 35));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 117, 105));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jButton2.setText("Update Account");
+        jButton2.setEnabled(false);
         jButton2.setPreferredSize(new java.awt.Dimension(79, 35));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(118, 48, 129));
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jButton4.setText("Clear All");
         jButton4.setPreferredSize(new java.awt.Dimension(79, 35));
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -179,7 +265,13 @@ public class UserManagementPanel extends javax.swing.JPanel {
 
         jButton3.setBackground(new java.awt.Color(27, 49, 77));
         jButton3.setText("Change Status");
+        jButton3.setEnabled(false);
         jButton3.setPreferredSize(new java.awt.Dimension(79, 35));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/glass.png"))); // NOI18N
 
@@ -217,8 +309,7 @@ public class UserManagementPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"", null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "First Name", "Last Name", "Mobile", "Username", "User Type", "User Status"
@@ -263,6 +354,69 @@ public class UserManagementPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        String fname = jTextField1.getText();
+        String lname = jTextField2.getText();
+        String mobile = jTextField3.getText();
+        String username = jTextField4.getText();
+        String password = String.valueOf(jPasswordField1.getPassword());
+        String type = String.valueOf(jComboBox1.getSelectedItem());
+
+        if (fname.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "First name is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (fname.length() > 40) {
+            JOptionPane.showMessageDialog(this, "First name shuld be less than 40 characters", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (lname.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Last name is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (lname.length() > 40) {
+            JOptionPane.showMessageDialog(this, "Last name shuld be less than 40 characters", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (mobile.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mobile number is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (!mobile.matches("^07[01245678]{1}[0-9]{7}$")) {
+            JOptionPane.showMessageDialog(this, "Invalid mobile number", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (username.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Password is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (type.equals("Select")) {
+            JOptionPane.showMessageDialog(this, "Select user type", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                ResultSet resultSet = MySQL.execute("SELECT * FROM `user` WHERE `mobile`='" + mobile + "' AND `password`='" + password + "'");
+
+                if (resultSet.next()) {
+                    JOptionPane.showMessageDialog(this, "User already exists!", "warning", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    MySQL.execute("INSERT INTO `user` "
+                            + "(`fname`,`lname`,`mobile`,`username`,`password`,`user_type_id`) "
+                            + "VALUES ('" + fname + "','" + lname + "','" + mobile + "','" + username + "','" + password + "',"
+                            + "'" + typeMap.get(type) + "')");
+                    resetUserPanel();
+                    loadUsers("SELECT * FROM `user` "
+                            + "INNER JOIN `user_type` ON `user`.`user_type_id`=`user_type`.`id` "
+                            + "INNER JOIN `status` ON `user`.`status_id`=`status`.`id`");
+                    JOptionPane.showMessageDialog(this, "User saved successfully!", "information", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (Exception e) {
+                SignIn.log1.warning(e.toString());
+            }
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        resetUserPanel();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

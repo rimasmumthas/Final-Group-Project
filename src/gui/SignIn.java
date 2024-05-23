@@ -1,9 +1,28 @@
 package gui;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.sql.ResultSet;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import model.MySQL;
+import model.UserBean;
 
 public class SignIn extends javax.swing.JFrame {
+
+    public static Logger log1;
+    public static FileHandler handler;
+
+    static {
+        try {
+            log1 = Logger.getLogger("log1");
+            handler = new FileHandler("log.txt", true);
+            log1.addHandler(handler);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public SignIn() {
         initComponents();
@@ -158,8 +177,50 @@ public class SignIn extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new Dashboard().setVisible(true);
-        this.dispose();
+
+        String username = jTextField1.getText();
+        String password = String.valueOf(jPasswordField1.getPassword());
+
+        if (username.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please type username", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please type password", "Warning", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            try {
+                ResultSet resultSet = MySQL.execute("SELECT * FROM `user` "
+                        + "INNER JOIN `status` ON `user`.`status_id`=`status`.`id` "
+                        + "INNER JOIN `user_type` ON `user`.`user_type_id`=`user_type`.`id` "
+                        + "WHERE `username`='" + username + "' AND `password`='" + password + "'");
+
+                if (resultSet.next()) {
+                    if (resultSet.getString("status.status").equals("Active")) {
+                        UserBean userBean = new UserBean();
+                        userBean.setId(resultSet.getInt("id"));
+                        userBean.setFname(resultSet.getString("fname"));
+                        userBean.setLname(resultSet.getString("lname"));
+                        userBean.setUsername(resultSet.getString("username"));
+                        userBean.setMobile(resultSet.getString("mobile"));
+                        userBean.setMobile(resultSet.getString("user_type.type"));
+
+                        Dashboard dashboard = new Dashboard();
+                        dashboard.setUserBean(userBean);
+                        dashboard.setVisible(true);
+                        this.dispose();
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Sorry! you are not a valid user", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Invalid Credentials", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+
+            } catch (Exception e) {
+                log1.warning(e.toString());
+            }
+
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
