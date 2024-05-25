@@ -13,7 +13,7 @@ import subGui.AddBrand;
 import subGui.AddCategory;
 
 public class ProductManagement extends javax.swing.JPanel {
-
+    
     public ProductManagement() {
         initComponents();
         JTable[] jt = {jTable1};
@@ -39,9 +39,9 @@ public class ProductManagement extends javax.swing.JPanel {
             
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.setRowCount(0);
-
+            
             while (resultSet.next()) {
-
+                
                 Vector v = new Vector();
                 v.add(resultSet.getString("p_id"));
                 v.add(resultSet.getString("title"));
@@ -56,41 +56,43 @@ public class ProductManagement extends javax.swing.JPanel {
         }
     }
     
-        public JTextField getJTextField3() {
+    public JTextField getJTextField3() {
         return jTextField3;
     }
-        
-        public JTextField getJTextField5() {
+    
+    public JTextField getJTextField5() {
         return jTextField5;
     }
     
     Dashboard dashboard;
-    public void setDashboard(Dashboard dashboard){
+    
+    public void setDashboard(Dashboard dashboard) {
         this.dashboard = dashboard;
     }
     
     HashMap<String, String> maincat_map = new HashMap<>();
+    
     private void loadMainCategory() {
-
+        
         try {
-
+            
             ResultSet resultSet = MySQL.execute("SELECT * FROM `main_category`");
-
+            
             Vector<String> v = new Vector();
             v.add("Select");
-
+            
             while (resultSet.next()) {
                 v.add(resultSet.getString("mc_name"));
-                maincat_map.put(resultSet.getString("mc_name"),resultSet.getString("mc_id"));
+                maincat_map.put(resultSet.getString("mc_name"), resultSet.getString("mc_id"));
             }
-
+            
             DefaultComboBoxModel model = new DefaultComboBoxModel(v);
             jComboBox2.setModel(model);
-
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Load types exception! " + e.getClass(), "warning", JOptionPane.WARNING_MESSAGE);
         }
-
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -222,14 +224,6 @@ public class ProductManagement extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -239,7 +233,7 @@ public class ProductManagement extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel6))
-                        .addGap(12, 12, 12))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
@@ -249,7 +243,15 @@ public class ProductManagement extends javax.swing.JPanel {
                                     .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,11 +320,11 @@ public class ProductManagement extends javax.swing.JPanel {
                         .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(93, 93, 93))
+                .addGap(0, 0, 0))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -331,7 +333,7 @@ public class ProductManagement extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
@@ -394,11 +396,11 @@ public class ProductManagement extends javax.swing.JPanel {
                 .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -409,7 +411,7 @@ public class ProductManagement extends javax.swing.JPanel {
         String Brand = jTextField5.getText();
         String mainCategory = String.valueOf(jComboBox2.getSelectedItem());
         String subCategory = jTextField3.getText();
-
+        
         if (productTitle.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please Enter Product Title", "warning", JOptionPane.WARNING_MESSAGE);
         } else if (Brand.isEmpty()) {
@@ -418,8 +420,8 @@ public class ProductManagement extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please Select Main Category", "warning", JOptionPane.WARNING_MESSAGE);
         } else if (subCategory.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please Select Sub Category", "warning", JOptionPane.WARNING_MESSAGE);
-        }  else {
-
+        } else {
+            
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -450,6 +452,7 @@ public class ProductManagement extends javax.swing.JPanel {
         addBrand.setDashboard(dashboard);
         addBrand.setProductManagement(this);
         addBrand.setVisible(true);
+        dashboard.setEnabled(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTextField6KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyReleased
@@ -459,14 +462,14 @@ public class ProductManagement extends javax.swing.JPanel {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             
             jTable1.setEnabled(false);
             jButton1.setEnabled(false);
             
             int selectedRow = jTable1.getSelectedRow();
             
-            String productTitle  = String.valueOf(jTable1.getValueAt(selectedRow, 1));
+            String productTitle = String.valueOf(jTable1.getValueAt(selectedRow, 1));
             jTextField4.setText(productTitle);
             
             String Brand = String.valueOf(jTable1.getValueAt(selectedRow, 2));
@@ -475,8 +478,8 @@ public class ProductManagement extends javax.swing.JPanel {
             String mainCategory = String.valueOf(jTable1.getValueAt(selectedRow, 3));
             jComboBox2.setSelectedItem(mainCategory);
             
-            String subCategory  = String.valueOf(jTable1.getValueAt(selectedRow, 4));
-            jTextField3.setText(subCategory );
+            String subCategory = String.valueOf(jTable1.getValueAt(selectedRow, 4));
+            jTextField3.setText(subCategory);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
