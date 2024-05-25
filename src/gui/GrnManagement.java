@@ -14,8 +14,8 @@ import java.util.Random;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import model.MySQL;
-import subgui.AddProductList;
-import subgui.AddSupplier;
+import subGui.AddProductList;
+import subGui.AddSupplier;
 
 public class GrnManagement extends javax.swing.JPanel {
 
