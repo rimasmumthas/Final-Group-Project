@@ -99,7 +99,6 @@ public class AddProductList extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(617, 710));
 
         kGradientPanel2.setToolTipText("Title Bar");
         kGradientPanel2.setkBorderRadius(0);

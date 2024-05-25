@@ -9,8 +9,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.MySQL;
-import subGui.AddBrand;
-import subGui.AddCategory;
+import subgui.AddBrand;
+import subgui.AddCategory;
 
 public class ProductManagement extends javax.swing.JPanel {
 
